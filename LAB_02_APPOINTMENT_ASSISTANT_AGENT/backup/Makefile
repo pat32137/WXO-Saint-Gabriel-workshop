@@ -21,12 +21,6 @@ create_secret:
 get_secret:
 	ibmcloud ce secret get --name $(SECRET_NAME)
 
-register:
-	ibmcloud ce registry create --name $(PROJECT_NAME) \
-		--server https://index.docker.io/v1/ \
-		--username ameengwxo \
-		--password Ameen123456
-
 create:
 	ibmcloud ce application create --name st-grabriel-workshop --cpu 2 --memory 4G --es 4G --min-scale 1 --env-from-secret $(SECRET_NAME) -v public \
 		--image docker.io/$(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG) \
