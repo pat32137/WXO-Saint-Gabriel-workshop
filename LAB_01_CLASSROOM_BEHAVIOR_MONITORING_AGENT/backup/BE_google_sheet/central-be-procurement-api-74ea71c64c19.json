@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "central-be-procurement-api",
+  "private_key_id": "74ea71c64c1986ef8b38343173463d409e50ee34",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCcazqi2thUEirT\nlNpqMKmqOin+aeaep6oI/aRb8SewjQ0u5A3R4b+kkBtolyHXJ73msmgi/DnAvkhn\npYei4QcPove/7dA+A6Dnz2v9SuuAiBPeBOLDurr10HK1NMSKUGanGwfkFMoA4DPN\nnz65sueT0neNF5BjA5A0L5r2Sbln9AFi2FLgQms+buzSVy/y8As5XJZJ71XUxmj1\nVGjc0vPLms47BEGrkAqO2E41oTPhOzbVmrzNLIL4rw0taYxc1+BASYXDfAVpdifA\nDVtlAcnVtrmcDgkj+FEkAUhFAl6fpYQsdu4cAQ3oBu2l1q9IKYaXxRAqaFH03I9I\n+fDaeU/xAgMBAAECggEAFZ50ckHRGH2SUcAHGBo1uQNk/nbgmxkNVUTJTLPeCnbU\nVaDLkDClbjdEsoYA9V3Wz2XlIsC9srgaBclJH+f+M9kQaQSTfZ6+xItUn6OVPSSR\nqmP+e5L5eDQhRo5Og9ds+LextYJyEQDr6AWUg9IIU9QJFgUlvammarARuOyjpYxK\ngdlm73O2LvFzPDoXoo6u2E69oFUqpMmh76pT2ZNBVltzfUbIZ/eh1sVRrHX+++33\n9s8gZAj8BJ8TOMwvoyvemtoqOjDC4jy60XHsDCQg8PJu26EsuYgiLftZQJF79EC/\naFmkoHvPv2Oe98vhOZrPV9Bsi6FStiwygp5SX6cfaQKBgQDbFI5gSEcjymW71FdE\nIgES+kVLBrGpIKLApUhJJU73+G4ghqVUecgKbCd4VyFPQ1PRtpSeeEiOVhHjdIVW\nUESfn9poVD1Y0MyAp89S84nY7TfY4Bj9kltUgKvwWvv77wj4ILegsS7WiTah+ODY\nBStseAPdF4AIKhs1cJ+/97E+gwKBgQC2x13939zSmS7U7DakEWtIxBrp1yS4PGmO\n1wVMUUmuVzGZuxbsU0yc3eyRw2CJnUFUJE5vo0BQuZaqxYNfRhMeEdtxMalcwV8R\nIUPtBuoljwjqn86ZMxRuebAkwwCMeBEqvGnduJYuPGhzJXJkaxFLK3Y82eC0THQe\neKHy/fvtewKBgFIshbLrqXNtSXeIkCsILir2IOOhYSY1DZcA5/o3ukUctAITPxRO\nkZAHPU7QL7hRYrE4sMo4B88Lza3pWNIlTXgqN3wGjPQxbWOcjhFpM/1gDSCV/gmu\nyf8KPHPtTLMU1+JqMzZc/1qNISbj+UJNvhnzck+NrwJg+M+0rNcOizcNAoGAVN4R\nWHX/dJHH2vmrDVdBN1JHJNjOpfT3FmnkfeEokxjNYRIrvKOY6SVqWOwdAQjRcp5B\nBTkJ/fGOcdCwBSbmbYnhGJf0iasH105Y2c/iHHpjq310UlITZJCAJzGcKZz+a5d8\nmITCxskpvn1eth24s+yERBDucwkkyZk9qTQhK80CgYBhislrb4NUhOFA8dyvj3L4\ndwUAS4vqzZsHlcSGyO/AUn+K7YQyZjr1NOnYAD+lHrNJ2mmaObsp7Db/K10atZDS\nLcQ+j6PXpM9pH2JHIC2xd9GTMo+m61El6yYx9yc2FFo0UHAylUPw74dFR16+V4l3\nN9R8XPg57WdMYJQXBLTM8g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "sheets-api-access-986@central-be-procurement-api.iam.gserviceaccount.com",
+  "client_id": "117988079685860231908",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sheets-api-access-986%40central-be-procurement-api.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

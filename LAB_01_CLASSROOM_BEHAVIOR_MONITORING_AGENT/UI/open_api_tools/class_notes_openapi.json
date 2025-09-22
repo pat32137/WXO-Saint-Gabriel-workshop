@@ -1,0 +1,276 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Classroom Behavior Monitoring API",
+    "description": "Classroom behavior monitoring API for recording and viewing student behavior observations, tracking behavior patterns, and managing class notes. Compatible with Watsonx Orchestrate and Swagger UI.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/behaviors": {
+      "get": {
+        "summary": "View student behavior history",
+        "description": "Retrieve the complete history of student behavior observations, including date, student, behavior category,and notes.",
+        "operationId": "getBehaviorHistory",
+        "responses": {
+          "200": {
+            "description": "Returns a list of behavior observations. Each record includes:\n- date: Date of observation (DD-MM-YYYY)\n- student: Student name with title\n- behavior: Behavior category\n- notes: Detailed notes about the behavior",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BehaviorHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Record student behavior observation",
+        "description": "Record a new student behavior observation with date, student name, behavior category, and detailed notes.\n        All fields except notes are required. Notes can be provided or left empty. The behavior category must be one of: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement).",
+        "operationId": "addBehavior",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BehaviorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the recorded behavior observation with a status message.\nFields returned:\n- message: Status message\n- date: Date of observation (DD-MM-YYYY)\n- student: Student name with title\n- behavior: Behavior category\n- notes: Detailed notes about the behavior",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BehaviorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "description": "Simple health check endpoint",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BehaviorHistoryItem": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "student": {
+            "type": "string",
+            "title": "Student"
+          },
+          "behavior": {
+            "type": "string",
+            "title": "Behavior"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "student",
+          "behavior"
+        ],
+        "title": "BehaviorHistoryItem"
+      },
+      "BehaviorHistoryResponse": {
+        "properties": {
+          "behaviors": {
+            "items": {
+              "$ref": "#/components/schemas/BehaviorHistoryItem"
+            },
+            "type": "array",
+            "title": "Behaviors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "behaviors"
+        ],
+        "title": "BehaviorHistoryResponse"
+      },
+      "BehaviorRequest": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date",
+            "description": "Date of observation (DD-MM-YYYY format, e.g., 22-09-2025)"
+          },
+          "student": {
+            "type": "string",
+            "title": "Student",
+            "description": "Student name with title (e.g., ด.ญ. กานดา พิพัฒน์, ด.ช. ณัฐพล ศรีวงศ์)"
+          },
+          "behavior": {
+            "type": "string",
+            "title": "Behavior",
+            "description": "Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement), 'เป็นกลาง' (neutral)"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes",
+            "description": "Detailed notes about the behavior observation (optional)",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "student",
+          "behavior"
+        ],
+        "title": "BehaviorRequest"
+      },
+      "BehaviorResponse": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Status message for the behavior record"
+          },
+          "date": {
+            "type": "string",
+            "title": "Date",
+            "description": "Date of observation (DD-MM-YYYY)"
+          },
+          "student": {
+            "type": "string",
+            "title": "Student",
+            "description": "Student name with title"
+          },
+          "behavior": {
+            "type": "string",
+            "title": "Behavior",
+            "description": "Behavior category"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes",
+            "description": "Detailed notes about the behavior",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "date",
+          "student",
+          "behavior"
+        ],
+        "title": "BehaviorResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://be-class-behavior-ggs.20lxtlu1ylfn.us-south.codeengine.appdomain.cloud",
+      "description": "Production server"
+    }
+  ]
+}
