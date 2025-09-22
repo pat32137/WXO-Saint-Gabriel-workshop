@@ -80,6 +80,45 @@
           }
         }
       }
+    },
+    "/send-email": {
+      "post": {
+        "summary": "Send email notification",
+        "description": "Send an email notification using Gmail SMTP. \n        Requires to_email, subject, and content. CC is optional.",
+        "operationId": "sendEmail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GmailRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the email sending status with details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GmailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -218,6 +257,76 @@
           "behavior"
         ],
         "title": "BehaviorResponse"
+      },
+      "GmailRequest": {
+        "properties": {
+          "to_email": {
+            "type": "string",
+            "title": "To Email",
+            "description": "Recipient email address"
+          },
+          "cc_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cc Email",
+            "description": "CC email address (optional)"
+          },
+          "subject": {
+            "type": "string",
+            "title": "Subject",
+            "description": "Email subject/topic"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "Email content/body"
+          }
+        },
+        "type": "object",
+        "required": [
+          "to_email",
+          "subject",
+          "content"
+        ],
+        "title": "GmailRequest"
+      },
+      "GmailResponse": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Status message for the email"
+          },
+          "to_email": {
+            "type": "string",
+            "title": "To Email",
+            "description": "Recipient email address"
+          },
+          "subject": {
+            "type": "string",
+            "title": "Subject",
+            "description": "Email subject"
+          },
+          "sent_at": {
+            "type": "string",
+            "title": "Sent At",
+            "description": "Timestamp when email was sent"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "to_email",
+          "subject",
+          "sent_at"
+        ],
+        "title": "GmailResponse"
       },
       "HTTPValidationError": {
         "properties": {
