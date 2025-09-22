@@ -1,0 +1,265 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Email and Google Calendar API",
+    "version": "1.0.0",
+    "description": "API for sending emails and creating Google Calendar events."
+  },
+  "servers": [
+    {
+      "url": "https://st-grabriel-workshop.1yvlsq65zd5f.us-south.codeengine.appdomain.cloud",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/send-email": {
+      "post": {
+        "summary": "Send a plain email",
+        "description": "Sends a plain email using Gmail SMTP.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["to", "subject", "body"],
+                "properties": {
+                  "to": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "someone@example.com"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "example": "Test Email"
+                  },
+                  "body": {
+                    "type": "string",
+                    "example": "Hello, this is a test email."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email sent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing required fields"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error while sending email"
+          }
+        }
+      }
+    },
+    "/create-calendar-event": {
+      "post": {
+        "summary": "Create a Google Calendar event",
+        "description": "Creates a calendar event in the authenticated user's Google Calendar.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["summary", "description", "start", "end", "attendees"],
+                "properties": {
+                  "summary": {
+                    "type": "string",
+                    "example": "Procurement Meeting"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Discuss procurement requirements"
+                  },
+                  "start": {
+                    "type": "string",
+                    "description": "Start datetime in `YYYYMMDDTHHMMSS` format",
+                    "example": "20250921T100000"
+                  },
+                  "end": {
+                    "type": "string",
+                    "description": "End datetime in `YYYYMMDDTHHMMSS` format",
+                    "example": "20250921T110000"
+                  },
+                  "attendees": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "example": ["someone@example.com", "other@example.com"]
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "example": "Asia/Bangkok"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Event created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Event created: https://calendar.google.com/event?eid=abc123"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing fields: start, end"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error while creating calendar event"
+          }
+        }
+      }
+    },
+    "/send-email-and-calendar-event": {
+      "post": {
+        "summary": "Send an email and create a Google Calendar event",
+        "description": "Sends an email and creates a calendar event in the authenticated user's Google Calendar.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["summary", "description", "start", "end", "email_attendees"],
+                "properties": {
+                  "summary": {
+                    "type": "string",
+                    "example": "Procurement Meeting"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Discuss procurement requirements"
+                  },
+                  "start": {
+                    "type": "string",
+                    "description": "Start datetime in `YYYYMMDDTHHMMSS` format",
+                    "example": "20250921T100000"
+                  },
+                  "end": {
+                    "type": "string",
+                    "description": "End datetime in `YYYYMMDDTHHMMSS` format",
+                    "example": "20250921T110000"
+                  },
+                  "email_attendees": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "example": ["someone@example.com", "other@example.com"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Email sent and event created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email sent and event created: https://calendar.google.com/event?eid=abc123"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing fields: start, end"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error while sending email or creating calendar event"
+          }
+        }
+      }
+    }
+  }
+}
