@@ -189,7 +189,7 @@
           "behavior": {
             "type": "string",
             "title": "Behavior",
-            "description": "Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement), 'เป็นกลาง' (neutral)"
+            "description": "Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement)"
           },
           "notes": {
             "anyOf": [

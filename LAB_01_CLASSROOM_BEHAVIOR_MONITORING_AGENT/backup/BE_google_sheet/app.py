@@ -70,7 +70,7 @@ def get_gsheet(sheet_name: str):
 class BehaviorRequest(BaseModel):
     date: str = Field(..., description="Date of observation (DD-MM-YYYY format, e.g., 22-09-2025)")
     student: str = Field(..., description="Student name with title (e.g., ด.ญ. กานดา พิพัฒน์, ด.ช. ณัฐพล ศรีวงศ์)")
-    behavior: str = Field(..., description="Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement), 'เป็นกลาง' (neutral)")
+    behavior: str = Field(..., description="Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement)")
     notes: Optional[str] = Field("", description="Detailed notes about the behavior observation (optional)")
 
 class BehaviorResponse(BaseModel):
