@@ -15,8 +15,8 @@ import webbrowser
 # Load environment variables from .env
 load_dotenv()
 
-EMAIL_ADDRESS = "ameengulistan@gmail.com"
-EMAIL_PASSWORD = "lrrr jhua cdbw fbxx"
+EMAIL_ADDRESS = ""
+EMAIL_PASSWORD = ""
 
 # --- Google Calendar API Configuration ---
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
