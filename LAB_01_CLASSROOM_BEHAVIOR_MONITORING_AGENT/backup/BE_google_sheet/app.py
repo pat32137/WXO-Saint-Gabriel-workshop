@@ -7,6 +7,9 @@ from fastapi.responses import JSONResponse
 import gspread
 from google.oauth2.service_account import Credentials
 from dotenv import load_dotenv
+from email.message import EmailMessage  # For creating email messages
+import smtplib          # For SMTP email sending
+from datetime import datetime  # For timestamp
 
 
 env_path = os.path.join(os.path.dirname(__file__), ".env")
@@ -43,6 +46,10 @@ app.openapi = custom_openapi
 # Google Sheets setup
 SHEET_ID = "1kH5pafULRdw1rZ2YaRhNLkxZizVrxQDcWa3uIyL9ADw"  # Replace with your actual spreadsheet ID
 
+# Email configuration
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+
 def get_gsheet(sheet_name: str):
     try:
         creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
@@ -63,7 +70,7 @@ def get_gsheet(sheet_name: str):
 class BehaviorRequest(BaseModel):
     date: str = Field(..., description="Date of observation (DD-MM-YYYY format, e.g., 22-09-2025)")
     student: str = Field(..., description="Student name with title (e.g., ด.ญ. กานดา พิพัฒน์, ด.ช. ณัฐพล ศรีวงศ์)")
-    behavior: str = Field(..., description="Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement), 'เป็นกลาง' (neutral)")
+    behavior: str = Field(..., description="Behavior category: 'เชิงบวก' (positive), 'ควรปรับปรุง' (needs improvement)")
     notes: Optional[str] = Field("", description="Detailed notes about the behavior observation (optional)")
 
 class BehaviorResponse(BaseModel):
@@ -81,6 +88,18 @@ class BehaviorHistoryItem(BaseModel):
     
 class BehaviorHistoryResponse(BaseModel):
     behaviors: List[BehaviorHistoryItem]
+
+class GmailRequest(BaseModel):
+    to_email: str = Field(..., description="Recipient email address")
+    cc_email: Optional[str] = Field(None, description="CC email address (optional)")
+    subject: str = Field(..., description="Email subject/topic")
+    content: str = Field(..., description="Email content/body")
+
+class GmailResponse(BaseModel):
+    message: str = Field(..., description="Status message for the email")
+    to_email: str = Field(..., description="Recipient email address")
+    subject: str = Field(..., description="Email subject")
+    sent_at: str = Field(..., description="Timestamp when email was sent")
 
 class ErrorResponse(BaseModel):
     detail: str
@@ -101,7 +120,7 @@ def add_behavior(behavior: BehaviorRequest):
     User needs to provide date (DD-MM-YYYY), student name, and behavior category. Notes are optional.
     """
     try:
-        sheet = get_gsheet(1)
+        sheet = get_gsheet('Sheet1')
         # Append new behavior record
         sheet.append_row([
             behavior.date,
@@ -159,3 +178,72 @@ def get_behavior_history():
 def health_check():
     """Simple health check endpoint"""
     return {"status": "healthy", "service": "Classroom Behavior Monitoring API"}
+
+@app.post(
+    "/send-email",
+    response_model=GmailResponse,
+    summary="Send email notification",
+    description="""Send an email notification using Gmail SMTP. 
+        Requires to_email, subject, and content. CC is optional.
+        """,
+    response_description="Returns the email sending status with details.",
+    operation_id="sendEmail"
+)
+def send_email(email_request: GmailRequest):
+    """
+    Send a plain email using Gmail SMTP.
+    User needs to provide to_email, subject, and content. CC is optional.
+    """
+    try:
+        # Validate email credentials
+        if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
+            return JSONResponse(
+                status_code=500, 
+                content={"detail": "Email credentials not configured. Please set EMAIL_ADDRESS and EMAIL_PASSWORD environment variables."}
+            )
+        
+        # Create email message
+        msg = EmailMessage()
+        msg["Subject"] = email_request.subject
+        msg["From"] = EMAIL_ADDRESS
+        msg["To"] = email_request.to_email
+        
+        # Add CC if provided
+        if email_request.cc_email:
+            msg["Cc"] = email_request.cc_email
+        
+        msg.set_content(email_request.content)
+
+        # Send email via Gmail SMTP
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+            smtp.send_message(msg)
+
+        # Return success response
+        return GmailResponse(
+            message="Email sent successfully",
+            to_email=email_request.to_email,
+            subject=email_request.subject,
+            sent_at=datetime.now().isoformat()
+        )
+
+    except smtplib.SMTPAuthenticationError:
+        return JSONResponse(
+            status_code=401,
+            content={"detail": "Email authentication failed. Please check EMAIL_ADDRESS and EMAIL_PASSWORD."}
+        )
+    except smtplib.SMTPException as e:
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"SMTP error occurred: {str(e)}"}
+        )
+    except Exception as e:
+        print(f"[ERROR] Failed to send email: {e}")
+        return JSONResponse(
+            status_code=500, 
+            content={"detail": f"Error sending email: {str(e)}"}
+        )
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
