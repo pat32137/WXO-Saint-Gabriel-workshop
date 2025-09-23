@@ -117,7 +117,7 @@ Test the agent functionality with the following sample queries:
 
 #### 4. Send Email Report
 ```
-ช่วยส่ง email สรุปรายงานความประพฤติด้วยเนื้อหาและหัวข้อที่เข้าใจง่ายและเป็นระเบียบ ไปที่ <your email address>
+ช่วยส่ง email สรุปรายงานความประพฤติ ของวันที่ 23 แบบอ่านง่ายๆ และลงชื่อด้วย โรงเรียนมงฟอร์ตวิทยาลัย ไปที่ <your email address>
 ```
 
 ![Prompt 4](UI/images/prompt4.png)
