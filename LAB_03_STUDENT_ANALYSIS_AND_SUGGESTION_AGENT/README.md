@@ -308,7 +308,6 @@ math and science
 
   ![second example pic](images/image52.png)
 
-  ![output](images/image57.png)
 
 
 
