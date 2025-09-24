@@ -18,7 +18,7 @@ Go to [Watsonx Orchestrate Builder](https://orchestrate.ibm.com)
 
 1. Choose **"Create from scratch"**
 2. Enter agent details:
-   - **Agent Name:** `Classroom Behavior Record Agent`
+   - **Agent Name:** `<Your name> - Classroom Behavior Record Agent`
    - **Description:** `An AI agent that helps teachers record and monitor student behavior observations, track behavior patterns, and manage classroom notes efficiently.`
 
 ## Step 4: Create Agent
