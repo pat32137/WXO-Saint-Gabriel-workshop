@@ -287,8 +287,7 @@ Whenever the user asks to analyze, review, or get recommendations for a student 
 - The analysis should highlight the alignment of the student with Bloom's Taxonomy and Erikson’s Stages, with specific recommendations for improvement.
 ```
   ![Behavior Section](images/image49.png)
-
-  ---
+---
 
   ### Testing
   
