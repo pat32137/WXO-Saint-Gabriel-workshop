@@ -80,3 +80,46 @@ The selected tools will now be displayed in the **Toolset** section, ready for u
 ![Agent Behavior Configuration](UI/images/agent-behavior-configuration.png)
 
 > **Note:** This instruction ensures your agent responds in the same language (Thai, English, etc.) that the user uses when asking questions.
+
+## Step 11: Testing the Agent
+
+### Access Google Sheets Data
+
+You can view the recorded behavior data in this Google Sheet:
+[Classroom Behavior Monitoring Sheet](https://docs.google.com/spreadsheets/d/1kH5pafULRdw1rZ2YaRhNLkxZizVrxQDcWa3uIyL9ADw/edit?usp=sharing)
+
+### Test Queries
+
+Test the agent functionality with the following sample queries:
+
+#### 1. Record Positive Behavior
+```
+วันนี้ ด.ช. กวิน ยิ่งใหญ่ ได้ช่วยทำความสะอาดห้องเรียน ช่วยบันทึกลงในรายงานความประพฤติให้หน่อย
+```
+
+![Prompt 1](UI/images/prompt1.png)
+
+![Prompt 1 Result](UI/images/prompt1result.png)
+
+#### 2. Record Behavior That Needs Improvement
+```
+ด.ช. พดด้วง กูวกวินท์ ไม่ทำการบ้าน ช่วยบันทึกให้หน่อย
+```
+
+![Prompt 2](UI/images/prompt2.png)
+
+#### 3. Query Student Behavior History
+```
+ขอรายชื่อนักเรียนทุกคนที่มีพฤติกรรมควรปรับปรุง
+```
+
+![Prompt 3](UI/images/prompt3.png)
+
+#### 4. Send Email Report
+```
+ช่วยส่ง email สรุปรายงานความประพฤติ ของวันที่ 23 แบบอ่านง่ายๆ และลงชื่อด้วย โรงเรียนมงฟอร์ตวิทยาลัย ไปที่ <your email address>
+```
+
+![Prompt 4](UI/images/prompt4.png)
+
+![Prompt 4 Result](UI/images/prompt4result.png)

@@ -63,6 +63,8 @@
 - ALWAYS response in Thai.
 - You MUST ask for agenda of meeting and generate description by extend it from information you got.
 - Summarize the result after tool called successfully.
+
+**The description field is the email body. Please write it in email format, and end the email with Montfort School signature.**
 ```
 
 ## 5. Change model
@@ -83,4 +85,5 @@
 "<change_to_your_email>"
 
 ชั่วโมงแรกสำหรับทำความเข้าใจหลักสูตรโดยรวม และชั่วโมงที่สองจะแยกพบครูประจำชั้นเรียน
+
 ```
