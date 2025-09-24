@@ -94,7 +94,7 @@ Test the agent functionality with the following sample queries:
 
 #### 1. Record Positive Behavior
 ```
-วันนี้ ด.ช. กวิน ยิ่งใหญ่ ได้ช่วยทำความสะอาดห้องเรียน ช่วยบันทึกลงในรายงานความประพฤติให้หน่อย
+วันนี้ <ด.ช./ด.ญ yourname> ได้ช่วยทำความสะอาดห้องเรียน ช่วยบันทึกลงในรายงานความประพฤติให้หน่อย
 ```
 
 ![Prompt 1](UI/images/prompt1.png)
@@ -103,7 +103,7 @@ Test the agent functionality with the following sample queries:
 
 #### 2. Record Behavior That Needs Improvement
 ```
-ด.ช. พดด้วง กูวกวินท์ ไม่ทำการบ้าน ช่วยบันทึกให้หน่อย
+<ด.ช./ด.ญ yourname> ไม่ทำการบ้าน ช่วยบันทึกให้หน่อย
 ```
 
 ![Prompt 2](UI/images/prompt2.png)

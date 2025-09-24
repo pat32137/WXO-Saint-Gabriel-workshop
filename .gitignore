@@ -3,3 +3,4 @@
 venv/
 **build_and_push.sh
 **deploy_code_engine.sh
+**central-be-procurement-api-9540a19c2da7.json
