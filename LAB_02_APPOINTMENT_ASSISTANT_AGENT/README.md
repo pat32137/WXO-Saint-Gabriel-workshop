@@ -9,7 +9,7 @@
 ![photo](/LAB_02_APPOINTMENT_ASSISTANT_AGENT/UI/assets/image2.png)
 
 - Input 
-    - name: `Teacher Assistant` 
+    - name: `<Your name> Teacher Assistant` 
 
     - desciption: `This agent has send calendar event and email tool. It will help teacher arrange the meeting for any purpose with student's guardian. `
 
@@ -87,3 +87,4 @@
 ชั่วโมงแรกสำหรับทำความเข้าใจหลักสูตรโดยรวม และชั่วโมงที่สองจะแยกพบครูประจำชั้นเรียน
 
 ```
+
