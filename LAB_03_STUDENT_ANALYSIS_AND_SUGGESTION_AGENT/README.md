@@ -8,7 +8,7 @@ Prerequisites
 ## Steps
 1. Create the agent<br/>
     1.1 Choose `create from scratch`<br>
-    1.2 Create a new agent named `student_evaluator_agent` <br>
+    1.2 Create a new agent named `<Name>_student_evaluator_agent` <br>
     1.3 Set the description to :<br>
     `This agent used when need to evaluate student's score and behavior report aligning with the standard evaluation criteria, the output will be overall analysis with recommended action based from each student's score and behavior report` 
 ---
@@ -22,7 +22,7 @@ Prerequisites
     2.3 Click the flow title (usually `Untitled`) in the top-left to open the flow settings.
     ![Open flow settings](images/image4.png)
 
-    2.4 Change the tool name to `student_evaluation_tool` and set the description to `This tool analyzes student academic performance, behavior, and activity reports against expected criteria, then generates personalized insights and recommendations to improve the student’s profile.`.<br>
+    2.4 Change the tool name to `<Name>_student_evaluation_tool` and set the description to `This tool analyzes student academic performance, behavior, and activity reports against expected criteria, then generates personalized insights and recommendations to improve the student’s profile.`.<br>
     2.5 Click Save.
 
     ![Set tool name and description](images/image5.png)
@@ -307,6 +307,7 @@ math and science
   ![first example pic](images/image51.png)
 
   ![second example pic](images/image52.png)
+
 
 
 
